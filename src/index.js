@@ -17,11 +17,12 @@ class MyGame extends Phaser.Scene
         this.lastTime = -100000000;
         this.numHeart = 0;
         this.interval = 5 * 1000;
-        this.minInterval = 1000;
+        this.minInterval = 1500;
         this.hearts = null;
         this.gameOver = false;
         this.score = 0;
         this.scoreText = null;
+        this.level = 1;
     }
 
     preload ()
@@ -51,7 +52,7 @@ class MyGame extends Phaser.Scene
 
         this.sword = this.sound.add('sword');
 
-        this.scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+        this.scoreText = this.add.text(16, 16, 'Score: 0 Level: 1', { fontSize: '32px', fill: '#000' });
 
     }
 
@@ -125,12 +126,13 @@ class MyGame extends Phaser.Scene
         // heart.setVelocityX(0);
         this.sword.play()
         this.numHeart += 1;
-        if (this.numHeart > 5) {
+        if (this.numHeart >= 3) {
             this.numHeart = 0;
             this.interval -= (this.interval - this.minInterval) / 2;
+            this.level += 1;
         }
         this.score += 10;
-        this.scoreText.setText('Score: ' + this.score);
+        this.scoreText.setText('Score: ' + this.score + ' Level: ' + this.level);
 
         console.log('hitplayer')
     }
