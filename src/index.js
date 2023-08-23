@@ -3,6 +3,8 @@ import dudeImg from './assets/dude.png';
 import skyImg from './assets/sky.png';
 import heartImg from './assets/heart.png';
 import swordSnd from './assets/sword.wav';
+import cutImg from './assets/cut.png';
+import sendImg from './assets/send.png';
 
 class MyGame extends Phaser.Scene
 {
@@ -26,6 +28,8 @@ class MyGame extends Phaser.Scene
     {
         this.load.image('sky', skyImg);
         this.load.image('heart', heartImg);
+        this.load.image('cut', cutImg);
+        this.load.image('send', sendImg);
         this.load.spritesheet('dude', dudeImg, { frameWidth: 32, frameHeight: 48 });
         this.load.audio('sword', swordSnd)
     }
@@ -36,8 +40,10 @@ class MyGame extends Phaser.Scene
 
         this.cursors = this.input.keyboard.createCursorKeys();
         
-        this.player = this.physics.add.sprite(20, 450, 'dude');
-        this.player2 = this.physics.add.sprite(800, 450, 'dude');
+        this.player = this.physics.add.sprite(20, 450, 'cut');
+        this.player.setScale(0.5);
+        this.player2 = this.physics.add.sprite(800, 450, 'send');
+        this.player2.setScale(0.5);
 
         this.hearts = this.physics.add.group();
 
@@ -84,12 +90,12 @@ class MyGame extends Phaser.Scene
 
         if (this.cursors.up.isDown)
         {
-            this.player.setVelocityY(-160);
+            this.player.setVelocityY(-200);
     
         }
         else if (this.cursors.down.isDown)
         {
-            this.player.setVelocityY(160);
+            this.player.setVelocityY(200);
     
             // player.anims.play('right', true);
         }
@@ -98,6 +104,15 @@ class MyGame extends Phaser.Scene
             this.player.setVelocityY(0);
     
             // player.anims.play('turn');
+        }
+
+        var pointer = this.input.activePointer;
+        if (pointer.isDown) {
+            if (pointer.y < 300) {
+                this.player.setVelocityY(-200);
+            } else {
+                this.player.setVelocityY(200);
+            }
         }
     
     }
