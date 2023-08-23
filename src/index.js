@@ -72,6 +72,9 @@ class MyGame extends Phaser.Scene
                 heart.setVelocity(-100,0)
                 heart.setCollideWorldBounds(true);
                 heart.body.onWorldBounds = true;
+
+                var scene = this;
+
                 heart.body.world.on('worldbounds', function(body) {
                     // Checks if it's the sprite that you'listening for
                     if (body.gameObject === this) {
@@ -79,8 +82,9 @@ class MyGame extends Phaser.Scene
                       this.setActive(false);
                       this.setVisible(false);
                       console.log('hitwall')
-                      this.physics.pause();
-                      this.gameOver = true;
+                      scene.scoreText.setText('Score: ' + scene.score + ' Level: ' + scene.level + ' Game Over');
+                      scene.physics.pause();
+                      scene.gameOver = true;
                     }
                   }, heart);
                 this.lastTime = time;
