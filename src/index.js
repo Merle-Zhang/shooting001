@@ -41,9 +41,9 @@ class MyGame extends Phaser.Scene
 
         this.cursors = this.input.keyboard.createCursorKeys();
         
-        this.player = this.physics.add.sprite(20, 450, 'cut');
+        this.player = this.physics.add.sprite(40, 450, 'cut');
         this.player.setScale(0.5);
-        this.player2 = this.physics.add.sprite(800, 450, 'send');
+        this.player2 = this.physics.add.sprite(770, 450, 'send');
         this.player2.setScale(0.5);
 
         this.hearts = this.physics.add.group();
